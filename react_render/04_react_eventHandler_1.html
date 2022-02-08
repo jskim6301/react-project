@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        
+        // input에 값을 입력해도 반영 안됨 - 재 랜더링 필요
+        const state = { keyword: "", typing: false, result: ""};
+
+        const App = () => {
+            function handleChange(event){
+                setState({ keyword: event.target.value });
+            }
+
+            return (
+                <>
+                    <input onChange={handleChange}/>
+                    <button>search</button>
+                    <p>Looking for ..{state.keyword}</p>
+                </>
+            );
+        };
+
+        function setState(newState) {
+            Object.assign(state,newState); // 바뀐 부분 업데이트
+        }
+        ReactDOM.render(<App/>,rootElement)
+	</script>
+</body>
+
+</html>

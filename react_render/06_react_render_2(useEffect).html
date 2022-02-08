@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        
+
+        // useEffect를 따로 따로 선언 -> 코드 중복              
+        const App = () => {
+            const [keyword, setKeyword] = React.useState(() => {
+                return window.localStorage.getItem("keyword");
+            });
+            const [result, setResult] = React.useState("");
+            const [typing, setTyping] = React.useState(false);
+
+            React.useEffect(() => {
+                window.localStorage.setItem("keyword",keyword);
+            },[keyword]);
+
+            React.useEffect(() => {
+                window.localStorage.setItem("result",result);
+            },[result]);
+
+            function handleChange(event){
+                setKeyword(event.target.value);
+                setTyping(true);
+            }
+
+            function handleClick(){
+                setTyping(false);
+                setResult(`We find results of ${keyword}`);
+            }
+
+            return (
+                <>
+                    <input onChange={handleChange} value={keyword}/>
+                    <button onClick={handleClick}></button>
+                    <p>{typing ? `Looking for ${keyword} ..` : result}</p>
+                </>
+            )
+        }
+
+
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>

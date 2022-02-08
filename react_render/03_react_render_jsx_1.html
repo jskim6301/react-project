@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        const Paint = ({title,description}) => (
+            <>
+                <h1>{title}</h1>
+                <h1>{description}</h1>
+            </>
+        );
+
+        // 바로 함수 적용하는 방법
+        const element = (
+            // <Paint title ~~ 는 JSX문법
+            // {Paint({...})} 는 js를 사용하여 호출
+            <>
+                <Paint title="Good" description="good"> 
+                    {Paint({title: "Bad",description:"bad",children: "hi"})}
+                </Paint>              
+            </>
+        );
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        const Paint_a = ({title,description,children}) => (
+            <>
+                <h1>{title}</h1>
+                <h1>{description}</h1>
+                {children /* span 태그 인식된다 - chilren은 jsx문법 */} 
+            </>
+        );    
+        
+        const Paint = ({title,description}) => (
+            // 대문자여야 한다
+            <>
+                <h1>{title}</h1>
+                <h1>{description}</h1>
+            </>
+        );
+
+
+        const paint = (title,description) => (
+            <>
+                <h1>{title}</h1>
+                <h1>{description}</h1>
+            </>
+        );
+
+        const VeryGood = () => (
+            <>
+                <h1>VeryGood</h1>
+            </>
+        );
+
+        // Paint를 소문자로 사용하면 warning error가 뜬다
+        const element = (
+            <>
+                <Paint title="Good" description="good">
+                    <VeryGood/>
+                    <VeryGood/>
+                    <VeryGood/>
+                    <VeryGood/>
+                </Paint>            
+                <Paint_a title="Good" description="good">
+                    <span>Hi</span>
+                </Paint_a>
+                <Paint title="Good" description="good"/>  
+                {paint("Good","good")}
+                {paint("Bad","bad")}
+                {paint("So so","so so")}
+            </>
+        );
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>

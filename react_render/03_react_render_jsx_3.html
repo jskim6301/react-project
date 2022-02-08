@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        function Number({number}){
+            return number % 2 === 0 ? <h1>{number}</h1> : <h3>{number}</h3>
+        }
+
+        const handleClick = () => alert("pressed");
+
+        const element = (
+            <>
+                <Number number={1}/>
+                <Number number={2}/>
+                <Number number={3}/>
+                <button onClick={handleClick} onMouseOut={() => alert("bye")}></button>
+            </>
+        );
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>

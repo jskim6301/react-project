@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        // jsx와 js를 혼합하여 사용
+        const Text = ({text}) => {
+            if(text.charAt(0) === text.charAt(0).toUpperCase()){
+                return (
+                    <h1>
+                        {text /* js */}
+                    </h1> //jsx 
+                );
+            }else{
+                return <h3>{text}</h3>;
+            }
+        }
+
+        const element = (
+            <>
+                <Text text="Text"/>
+                <Text text="text"/>
+            </>
+        );
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>

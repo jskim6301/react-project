@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        const element = (
+
+            <>   
+                <h1>Hi</h1>
+                <h1>Bye</h1>
+                <h1>children</h1>
+            </>
+
+            // <React.Fragment>   
+            //     <h1>Hi</h1>
+            //     <h1>Bye</h1>
+            //     <h1>children</h1>
+            // </React.Fragment>   
+
+
+            // <React.Fragment >   
+            //     {[
+            //         <h1>Hi</h1>,
+            //         <h1>Bye</h1>,
+            //         <h1>children</h1>
+            //     ]}
+            // </React.Fragment>   
+
+            // <React.Fragment 
+            //     children={[
+            //         <h1>Hi</h1>,
+            //         <h1>Bye</h1>,
+            //         <h1>children</h1>
+            //     ]}
+            // />         
+
+            // <React.Fragment 
+            //     children={[
+            //         React.createElement("h1",null,"Hi"),
+            //         React.createElement("h1",null,"Bye"),
+            //         React.createElement("h1",null,"children"),                    
+            //     ]}
+            // />         
+            
+            
+            // <div 
+            //     children={[
+            //         React.createElement("h1",null,"Hi"),
+            //         React.createElement("h1",null,"Bye"),
+            //         React.createElement("h1",null,"children"),                    
+            //     ]}
+            // />
+        );
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>
