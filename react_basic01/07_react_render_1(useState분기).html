@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+ 
+        // search클릭시 인풋박스 출력/숨기기 처리하기
+        // input에 내용을 입력하면 하위에 내용이 출력되도록 하기
+        const App = () => {
+            const [show,setShow] = React.useState(false);
+
+            function handleClick(){
+                if(show){
+                    setShow(false);
+                }else{
+                    setShow(true);
+                }
+            }
+
+            return (
+                <>
+                    <button onClick="handleClick">Search</button>
+                    {show ? (
+                        <>
+                            <input />
+                            <p></p>
+                        </>
+                    ) : null}
+                </>
+            );
+        }
+        ReactDOM.render(<App/>,rootElement)
+	</script>
+</body>
+
+</html>

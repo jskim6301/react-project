@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+        
+        const Child = () => {
+            console.lop("Child render start");
+            const [text,setText] = React.useState(() => {
+                console.log("Child useState");
+                return "";
+            });
+
+            React.useEffect(() => {
+                console.log("Child useEffect, no deps");
+
+                return () => {
+                    console.log("Child useEffect [Cleanup], no deps");
+                }                
+            });  
+
+            React.useEffect(() => {
+                console.log("Child useEffect, empty deps");
+
+                return () => {
+                    console.log("Child useEffect [Cleanup], empty deps");
+                }                
+            },[]);  
+            
+            React.useEffect(() => {
+                console.log("Child useEffect, [text]");
+
+                return () => {
+                    console.log("Child useEffect [Cleanup], [text]");
+                }                
+            },[text]);              
+            
+            function handleChange(event){
+                setText(event.target.value);
+            }
+
+            console.lop("Child render end");
+            const element = (
+                <>
+                    <input onChange="handleChange"/>
+                    <p>{text}</p>
+                </>                
+            );
+            return element;
+        };
+
+        const App = () => {
+            console.log("App render start");
+            const [show,setShow] = React.useState(() => {
+                console.log("App useState");
+                return false;
+            });
+
+            React.useEffect(() => {
+                console.log("App useEffect, no deps");
+
+                return () => {
+                    console.log("App useEffect [Cleanup] no deps");
+                }
+            });
+
+            React.useEffect(() => {
+                console.log("App useEffect, empty deps");
+
+                return () => {
+                    console.log("App useEffect [Cleanup], empty deps");
+                }
+            },[]);
+
+            React.useEffect(() => {
+                console.log("App useEffect, [show]");
+
+                return () => {
+                    console.log("App useEffect [Cleanup], [show]");
+                }                
+            },[show]);            
+
+            function handleClick(){
+                setShow((prev) => !prev);
+            }
+
+            console.log("App render end");
+            return (
+                <>
+                    <button onClick="handleClick">Search</button>
+                    {show ? <Child/> : null}
+                </>
+            );
+        }
+        ReactDOM.render(<App/>,rootElement)
+	</script>
+
+    <p>
+        클린업 적용
+        처음 로딩시 
+        1.App render start 
+        2.App useState
+        3.App render end
+        4.App useEffect, no deps
+        5.App useEffect, empty deps
+        6.App useEffect, [show]
+        
+        button(search) 클릭시 (Child컴포넌트 mount)
+        1.App render start 
+        2.App render end
+        3.Child render start
+        4.Child useState
+        5.Child render end
+        6.App useEffect [Cleanup] no deps  *
+        7.App useEffect [Cleanup], [show]  *
+        8.Child useEffect, no deps
+        9.Child useEffect, empty deps
+        10.Child useEffect, [text]
+        11.App useEffect, no deps
+        12.App useEffect, [show]
+
+        ==> Child컴포넌트의 useEffect 실행이 일어나기 전에 App컴포넌트의 cleanup이 먼저 실행
+
+        input에 값을 입력시 (Child컴포넌트 change(update))
+        1.Child render start
+        2.Child render end
+        3.Child useEffect [Cleanup], no deps  *
+        4.Child useEffect [Cleanup], [text]   *
+        5.Child useEffect, no deps
+        6.Child useEffect, [text]
+
+        ==> Child컴포넌트의 useEffect 실행이 일어나기 전에 Child컴포넌트의 cleanup이 먼저 실행
+
+        input에 값이 있는 상태에서 button(search)클릭 (input태그 안보이도록 -> Child컴포넌트 unmount)
+        1.App render start 
+        2.App render end
+        3.Child useEffect [Cleanup], no deps
+        4.Child useEffect [Cleanup], empty deps
+        5.Child useEffect [Cleanup], [text]
+        6.App useEffect [Cleanup] no deps
+        7.App useEffect [Cleanup], [show]
+        8.App useEffect, no deps
+        9.App useEffect, [show]        
+
+        ==> Child컴포넌트 unmount될 때 cleanup은 순차적으로 다 이루어 진다.
+        ==> 리액트가 알아서 클린업 해준다.
+        ==> cleanup 동작에다가 우리가 하고싶은것들(로컬스토리지를 비워라 등등..)을 설정해주면
+            unmount될 때 clean이 된다.
+
+        
+        
+    </p>
+
+
+</body>
+
+</html>

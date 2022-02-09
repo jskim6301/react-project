@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+ 
+        const App = () => {
+            console.log("App render start");
+            const [show,setShow] = React.useState(() => {
+                console.log("App useState");
+                return false;
+            });
+
+            React.useEffect(() => {
+                console.log("App useEffect, no deps");
+            });
+
+            React.useEffect(() => {
+                console.log("App useEffect, empty deps");
+            },[]);
+
+            React.useEffect(() => {
+                console.log("App useEffect, [show]");
+            },[show]);            
+
+            function handleClick(){
+                setShow((prev) => !prev);
+            }
+
+            console.log("App render end");
+            return (
+                <>
+                    <button onClick="handleClick">Search</button>
+                    {show ? (
+                        <>
+                            <input />
+                            <p></p>
+                        </>
+                    ) : null}
+                </>
+            );
+        }
+        ReactDOM.render(<App/>,rootElement)
+	</script>
+
+    <p>
+        처음 로딩시 
+        1.App render start 
+        2.App useState
+        3.App render end
+        4.App useEffect, no deps
+        5.App useEffect, empty deps
+        6.App useEffect, [show]
+        => 렌더링이 끝난 다음 useEffect가 호출 (모두 다 그린 후에 이후 동작을 기록한다는 뜻)
+
+
+        버튼 클릭 후 show상태값이 바뀌었을 때
+        1.App render start
+        2.pp render end
+        3.App useEffect, no deps
+        4.App useEffect, [show]
+        => App useEffect, no deps는 dependency가 없기 때문에 모든 렌더를 다 호출
+        useEffect의 빈배열([])은 바뀐게 없어서 호출되지 않는다.
+    </p>
+
+
+</body>
+
+</html>

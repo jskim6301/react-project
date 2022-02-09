@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        function Button({className = "",style,...rest}) {
+            return <button className={`button${className === "" ? "" : ` ${className}`}`} 
+            style={{fontSize: 30, ...style}} 
+            {...rest} />;
+        }
+
+        // function Button({className = "",style,...rest}) {
+        //     return <button className={`button ${className}`} {...rest} />;
+        // }
+
+        // function Button(props) {
+        //     return <button {...props} />;
+        // }
+
+
+        const element = (
+            <>   
+                <Button className="button" style={{ borderRadius: "50%",fontSize: 20 }}>
+                    Green
+                </Button>
+                <Button className="button red">Red</Button>
+                <Button className="button blue">Blue</Button>
+            </>
+        );
+        ReactDOM.render(element,rootElement)
+	</script>
+</body>
+
+</html>
