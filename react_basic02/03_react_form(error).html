@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        /*
+        에러가 났을 때 상태값을 처리하는 함수 자체를 클래스컴포넌트에서만 제공하고 있다.(함수형 불가)
+        - ErrorBoundary
+        - static getDerivedStateFromError
+        */
+
+        class ErrorBoundary extends React.Component {
+            state = { error: null };
+            static getDerivedStateFromError(error) {
+                return { error };
+            }
+
+            render(){
+                const {error} = this.state;
+                if(error){
+                    // return this.props.fallback;
+                    return <this.props.fallback error={error} />;
+                    // props로 JSX태그 만들기 가능
+                }
+
+                return this.props.children; // children은 <ErrorBoundary/> 의 <Child/>를 기리킴
+                // 컴포넌트 태그 사이에 넣은 값을 가져오고 싶을 때
+                // children을 사용한다
+            }
+        }
+
+        const Child = () => {
+            throw new Error("Something wrong..");
+            return <p>Child...</p>
+        };
+
+        const Fallback = ({error}) => {
+            alert(error.message);
+            return <p>There is some Error...</p>;
+        }
+
+        const App = () => {
+            return (
+                <>
+                    <p>App</p>   
+                    <ErrorBoundary fallback={Fallback}> 
+                        <Child />
+                    </ErrorBoundary> 
+                    
+                </>
+                    // props로 JSX불가
+
+                // <ErrorBoundary fallback={<p>There is some Error...</p>}>
+                //         <Child />
+                // </ErrorBoundary>
+            );
+        };
+
+        ReactDOM.render(<App/>,rootElement)
+	</script>
+</body>
+
+</html>

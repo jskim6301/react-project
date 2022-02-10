@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        const todos = [
+            { id: 1, value: "aaaa"},
+            { id: 2, value: "bbbb"},
+            { id: 3, value: "cccc"},
+            { id: 4, value: "dddd"},
+        ];
+
+        const App = () => {
+            const [items,setItems] = React.useState(todos);
+
+            const handleDoneClick = (todo) => {
+                setItems((items) => items.filter((item) => item !== todo));
+            };
+
+            const handleRestoreClick = () => {
+                setItems((items) => [
+                    ...items,
+                    todos.find((todo) => !items.includes(todo))
+                ]);
+            };
+
+            return (
+                <>
+                    {items.map((item) => {
+                        <div key={item.id}>
+                            <span>{item.value}</span>
+                            <button onClick={() => handleDoneClick(item)}>Done</button>
+                        </div>
+                    })}
+                    <button onClick={handleRestoreClick}>Restored</button>z
+                </>
+            );
+        };
+
+        ReactDOM.render(<App/>,rootElement)
+	</script>
+</body>
+
+</html>
