@@ -1,0 +1,23 @@
+React.createContext
+    Context 객체를 생성
+    Context 객체를 구독하고 있는 컴포넌트를 구독하고 있는 컴포넌트를
+    렌더링할 때 React는 트리 상위에서 가장 가까이 있는 짝이 맞는
+    Provider로부터 현재값을 읽는다.
+
+
+Context.Provider
+    context를 구독하는 컴포넌트들에게 context의 변화를 알리는 역할을 함
+    'value' prop을 받아서 이 값을 하위에 있는 컴포넌트들에게 전달한다.
+    Provier 하위 context를 구독하는 모든 컴포넌트는 value prop이 바뀔 때마다
+    재랜더링 된다.
+
+Class.contextType  => useContext
+    React.createContext()로 생성한 Context객체를 원하는
+    클래스의 contextType 프로퍼티로 지정할 수 있다.
+    이 프로퍼티를 활용하여 클래스안에서 this.context를 이용해
+    해당 Context의 가장 가까운 Provider를 찾아 그 값을 읽을 수 있게 된다.
+
+Context.Consumer
+    context 변화를 구독하는 React 컴포넌트.
+    이 컴포넌트를 사용하면 함수 컴포넌트안에서 context를 구독할 수 있다.
+    Context.Consumer의 자식은 함수여야 한다.
