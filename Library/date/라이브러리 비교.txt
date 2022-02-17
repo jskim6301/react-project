@@ -1,0 +1,38 @@
+Moment
+타임존 -> moment/timezone
+Format/비교 -> 원하는 스타일로 표기 가능
+오래됨 -> Mutable/ Tree shaking x
+
+Day.js
+타임존 -> plugin/timezone plugin/utc
+Format/비교 -> 원하는 스타일로 표기 가능
+가벼움 -> Tree shaking x
+
+date-fns
+타임존 -> date-fns-tz
+Format/비교 -> 원하는 스타일로 표기 가능
+포괄적임 -> Immutable / Tree shaking o
+함수형 import -> 가능. ex)addWeeks
+
+라이브러리 선택 기준
+기능 / 성능 / 번들 사이즈 / tree shaking(안쓰는 기능 빌드하지 않기)
+문서 가독성 / 인기 / 관리상태(최근 관리) / 관리 주체
+
+기준을 토대로 Time / Date 라이브러리를 고른다면?
+    -가벼운게 최우선이라면 Day.js
+    -FP 패러다임을 따르거나 tree-shaking이 필요하다면 date-fns
+
+Moment 안좋음
+기능 / 성능 / Mutable  => So so 
+사이즈 / tree shaking  => BAD 
+관리 => BAD
+문서 가독성 => BAD
+
+Dayjs 중간
+기능 / 성능 => OK
+사이즈 / 문서 가독성 => GOOD
+tree shaking  => BAD 
+
+date-fns 좋음
+기능 / 성능 => OK
+사이즈 / tree shaking / 관리 / 문서 가독성 => GOOD
