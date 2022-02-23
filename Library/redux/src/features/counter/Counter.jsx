@@ -11,10 +11,12 @@ export default function Counter() {
     <div>
       <div>
           <button onClick={() => dispatch(increment())}>Increment</button>
-          <button onClick={() => dispatch(fetchIncrement(count))}>Fetch Increment</button>
           <span>{count}</span>      
           <button onClick={() => dispatch(decrement())}>Decrement</button>
           <button onClick={() => dispatch(incrementByAmount(5))}>+5</button>
+          <br/>
+          <p>axios를 이용한 increment</p>
+          <button onClick={() => dispatch(fetchIncrement(count))}>Fetch Increment</button>
       </div>
     </div>
   );
