@@ -39,6 +39,7 @@ import { action } from 'mobx';
         // etc etc.. add your own statements here...        
     }
 
+    // state를 바꿀때는 action으로 무조건 감싸라 (mobx의 방향)
     const load = () => {
         action(() => {
             store.pendingRequests++;
