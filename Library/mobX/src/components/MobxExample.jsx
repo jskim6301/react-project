@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { todoStore } from '../app/TodoStore'
-import { observableTodoStore } from '../app/ObserbableTodoStore'
+import { observableTodoStore } from '../app/ObservableTodoStore'
 export default function MobxExample() {
     const run = () => {
         todoStore.addTodo("read MobX tutorial");
@@ -26,6 +26,7 @@ export default function MobxExample() {
         observableTodoStore.todos[1].task = "try MobX in own project";
         observableTodoStore.todos[0].task = "grok MobX tutorial";
         // (todos[0].task) 0번째 task를 바꾼것은 report에 아무런 영향을 끼치지 않는다.        
+        // todos[0]이 completed가 되었기 때문에 실제로 변경이 되지 않아서 렌더링 되지 않는다.
     }
   return (
     <div>
