@@ -50,6 +50,10 @@ import { action } from 'mobx';
         }), 2000);        
     }
 
+    const fetchTodo = () => {
+        store.fetchData();
+    }
+
     return (
       <div>
         { store.report }
@@ -64,6 +68,10 @@ import { action } from 'mobx';
         
         <button onClick={run}>run code</button>
         <button onClick={load}>load data</button>
+
+
+        <button onClick={fetchTodo}>fetch Data</button>
+
       </div>
     );
   })
