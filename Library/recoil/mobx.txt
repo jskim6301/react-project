@@ -1,0 +1,7 @@
+keyword : observer / observable
+
+https://mobx.js.org/getting-started
+mobx / mobx-react
+
+https://mobxjs.org/react-integration.html
+mobx-react-lite
