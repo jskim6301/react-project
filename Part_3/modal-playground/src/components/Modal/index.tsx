@@ -36,7 +36,9 @@ interface Props {
     onClose: () => void;
     selector?: string;
 }
-
+/**
+ * Portal로 인해 rootElement하위에 태그가 붙는다.
+ */
 const Modal: React.FC<Props> = ({ children, onClose, isOpen, selector = '#modal-root' }) => (
     <CSSTransition in={isOpen} timeout={300} classNames="modal" unmountOnExit>
       <Portal selector={selector}>
@@ -46,6 +48,24 @@ const Modal: React.FC<Props> = ({ children, onClose, isOpen, selector = '#modal-
         </Overlay>
       </Portal>
     </CSSTransition>
-  )
+)
+
+
+const Modal2: React.FC<Props> = ({ children, onClose, isOpen, selector = '#modal-root' }) => {
+    return(
+        <>
+        {isOpen ? (
+        <Portal selector={selector}>
+            <Overlay>
+                <Dim onClick={onClose} />
+                <Container>{children}</Container>
+            </Overlay>
+        </Portal>
+        )   :   
+        null
+        }
+        </>
+    );
+}
 
 export default Modal;

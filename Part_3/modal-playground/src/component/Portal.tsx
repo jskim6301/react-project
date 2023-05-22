@@ -6,8 +6,8 @@ interface Props {
     selector?: string;
 }
 
-const Portal: React.FC<Props> = ({ children }) => {
-    const rootElement = document.getElementById('#modal-root');
+const Portal: React.FC<Props> = ({ children, selector }) => {
+    const rootElement = selector && document.getElementById(selector);
 
     return (
         <>
