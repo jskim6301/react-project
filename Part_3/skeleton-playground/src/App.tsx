@@ -5,7 +5,7 @@ import Skeleton from './components/Skeleton';
 const Base = styled.div`
   display: grid;
   width: 100%;
-  grid-template-column: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 12px;
   row-gap: 24px;
 `;
@@ -46,55 +46,50 @@ const Description = styled.p`
   font-size: 16px;
 `;
 
-const Placeholder: React.FC = () => (
+const Placeholder: React.FC = () => ( // <Item /> 에 대응하는 Placeholder 제작
   <Container>
-      <ImageWrapper>
-        <Skeleton width={320} height={220}/>
-      </ImageWrapper>
-      <Info>
-        <Skeleton width={150} height={29} rounded />
-        <div style={{ height: '8px' }}/>
-        <Skeleton width={200} height={19} rounded/>
-      </Info>
+    <ImageWrapper>
+      <Skeleton width={320} height={220} />
+    </ImageWrapper>
+    <Info>
+      <Skeleton width={150} height={29} rounded />
+      <div style={{ height: '8px' }} />
+      <Skeleton width={200} height={19} rounded />
+    </Info>
   </Container>
 );
 
-const Item: React.FC = () => {
-  return (
-    <Container>
-      <ImageWrapper>
-        <Image src='https://cdn.pixabay.com/photo/2023/05/15/14/35/cat-7995231_960_720.jpg'/>
-      </ImageWrapper>
+
+const Item: React.FC = () => ( // 실제 보여줄 컨텐츠
+  <Container>
+    <ImageWrapper>
+      <Image src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" />
+    </ImageWrapper>
       <Info>
-        <Title>Cat</Title>
-        <Description>zzzzzzzzzzzzzzzzzzzzz</Description>
+        <Title>Cat taking a nap</Title>
+        <Description>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</Description>
       </Info>
-    </Container>
-  );
-}
+  </Container>
+)
 
 
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    },2000);
-  },[]);
+  useEffect(() => { // 임의로 로딩 상태 표현
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
 
   return (
     <Base>
-      { loading ? 
-            Array.from({length: 25}).map((_,idx) => (
-              <Placeholder key={idx}/>
-            ))
-                : 
-            Array.from({length: 25}).map((_,idx) => (
-              <Item key={idx}/>
-            ))
-    }
+      {
+        loading ?  Array.from({ length: 25 }).map((_, idx) => (
+          <Placeholder key={idx} />
+        )) : Array.from({ length: 25 }).map((_, idx) => (
+          <Item key={idx} />
+        ))
+      }
     </Base>
   );
 }
