@@ -20,6 +20,7 @@ function App() {
   const [totalPages, setTotalPages] = useState(0);
   const [items, setItems] = useState<Array<IComment>>([]);
 
+
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get<Response>('https://jsonplaceholder.typicode.com/comments');
@@ -39,16 +40,18 @@ function App() {
   //     setPage(currentPage); 
   // };
 
+
+
   return (
     <div>
       <ul>
-        {
+        {/* {
           items.map(item => (
             <li key={item.id}>{item.body}</li>
           ))
-        }
+        } */}
       </ul>
-      <Pagination count={totalPages} page={page} onPageChange={handlePageChange}/>
+      <Pagination count={totalPages} page={page} onPageChange={handlePageChange} />
     </div>
   );
 }
