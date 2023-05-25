@@ -34,7 +34,7 @@ function App() {
   },[]);
 
   const handlePageChange = useCallback((currentPage: number): void => {
-    console.log("currentPage",currentPage);
+    // console.log("currentPage",currentPage);
     setPage(currentPage);
   },[]);
   
@@ -47,11 +47,11 @@ function App() {
   return (
     <div>
       <ul>
-        {
+        {/* {
           items.map(item => (
             <li key={item.id}>{item.body}</li>
           ))
-        }
+        } */}
       </ul>
       <Pagination count={totalPages} page={page} onPageChange={handlePageChange} />
     </div>

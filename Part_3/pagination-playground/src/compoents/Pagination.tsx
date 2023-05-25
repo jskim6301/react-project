@@ -45,16 +45,19 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = ({count, page, onPageChange}) => {
-    console.log("Pagination count",count);
-    console.log("Pagination page",page);
+    // console.log("Pagination count",count);
+    // console.log("Pagination page",page);
 
 
     const getLabel = (item: number | string) => {
-        // if()
+        if(typeof item === 'number') return item;
+        // else if(item.indexOf('ellipsis') > -1) return <AiOutlineEllipsis/>;
+        else if(item.indexOf('prev') > -1) return <GrFormPrevious/>;
+        else if(item.indexOf('next') > -1) return <GrFormNext/>;
         return item;
     }
 
-    const { items } = usePagination({onPageChange,page});
+    const { items } = usePagination({count,onPageChange,page});
 
     return (
         <Navigation>
