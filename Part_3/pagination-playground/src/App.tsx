@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from './compoents/Pagination';
+import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 
 interface IComment {
@@ -33,6 +34,7 @@ function App() {
   },[]);
 
   const handlePageChange = useCallback((currentPage: number): void => {
+    console.log("currentPage",currentPage);
     setPage(currentPage);
   },[]);
   
@@ -45,11 +47,11 @@ function App() {
   return (
     <div>
       <ul>
-        {/* {
+        {
           items.map(item => (
             <li key={item.id}>{item.body}</li>
           ))
-        } */}
+        }
       </ul>
       <Pagination count={totalPages} page={page} onPageChange={handlePageChange} />
     </div>

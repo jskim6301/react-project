@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled/macro';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { AiOutlineEllipsis } from 'react-icons/ai'
+import usePagination from '../hooks/usePagination';
 
 const Navigation = styled.nav``;
 const PaginationItem = styled.li``;
@@ -44,14 +45,27 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = ({count, page, onPageChange}) => {
-    console.log("count",count);
-    console.log("page",page);
+    console.log("Pagination count",count);
+    console.log("Pagination page",page);
+
+
+    const getLabel = (item: number | string) => {
+        // if()
+        return item;
+    }
+
+    const { items } = usePagination({onPageChange,page});
+
     return (
         <Navigation>
             <PaginationItemList>
-                <PaginationItem>
-                    <Button  >button</Button>
-                </PaginationItem>
+                {
+                    items?.map(({key,onClick,item}) => (
+                        <PaginationItem key={key}>
+                            <Button onClick={onClick}>{getLabel(item)}</Button>        
+                        </PaginationItem>
+                    ))
+                }
             </PaginationItemList>
             
         </Navigation>
