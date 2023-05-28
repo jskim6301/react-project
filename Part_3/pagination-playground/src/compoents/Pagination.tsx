@@ -42,30 +42,31 @@ interface Props {
     count: number;
     page: number;
     onPageChange: (page: number) => void;
+    disabled?: boolean;
 }
 
-const Pagination: React.FC<Props> = ({count, page, onPageChange}) => {
+const Pagination: React.FC<Props> = ({count, page, onPageChange,disabled}) => {
     // console.log("Pagination count",count);
     // console.log("Pagination page",page);
 
 
     const getLabel = (item: number | string) => {
         if(typeof item === 'number') return item;
-        // else if(item.indexOf('ellipsis') > -1) return <AiOutlineEllipsis/>;
+        else if(item.indexOf('ellipsis') > -1) return <AiOutlineEllipsis/>;
         else if(item.indexOf('prev') > -1) return <GrFormPrevious/>;
         else if(item.indexOf('next') > -1) return <GrFormNext/>;
         return item;
     }
 
-    const { items } = usePagination({count,onPageChange,page});
+    const { items } = usePagination({count,onPageChange,page,disabled});
 
     return (
         <Navigation>
             <PaginationItemList>
                 {
-                    items?.map(({key,onClick,item}) => (
+                    items?.map(({key,onClick,item,selected,disabled}) => (
                         <PaginationItem key={key}>
-                            <Button onClick={onClick}>{getLabel(item)}</Button>        
+                            <Button onClick={onClick} selected={selected} disabled={disabled}>{getLabel(item)}</Button>        
                         </PaginationItem>
                     ))
                 }
