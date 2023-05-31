@@ -43,15 +43,33 @@ const ButtonContainer = styled.div(
     }
 )
 
-const Table = styled.h1(
+const Table = styled.table(
     {
-        margin: "0",
-        padding: "8px 24px",
-        fontSize: "24px",
-        fontWeight: "normal",
+        borderCollapse: "collapse",
+        width: "100%",
+        height: "100%",
+        borderSpacing: "0",
+    }
+)
+
+const TableHeader = styled.thead`
+  padding-block: 12px;
+  > tr {
+    > th {
+      padding-block: 12px;
+      font-weight: normal;
+      color: #F8F7FA;
+    }
+  }
+`;
+
+const TableBody = styled.tbody();
+const TableData = styled.td(
+    {
         textAlign: "center",
-        color: "F8F7FA",
-        marginTop: "36px",
+        color: "#C9C8CC",
+        padding: "8px",
+        position: "relative",
     }
 )
 
@@ -88,7 +106,16 @@ const Calendar = () => {
                 </ButtonContainer>
             </Header>
             <Table>
-
+                <TableHeader>
+                    <tr>
+                        <th>11</th>
+                    </tr>
+                </TableHeader>
+                <TableBody>
+                    <tr>
+                        <td>1231</td>
+                    </tr>
+                </TableBody>
             </Table>
         </Base>
     );
