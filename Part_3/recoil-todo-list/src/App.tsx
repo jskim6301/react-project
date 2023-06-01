@@ -5,7 +5,6 @@ const App: React.FC = () => {
     return (
         <>
         <RecoilRoot>
-            <div>hello world</div>
             <Calendar/>
         </RecoilRoot>
         </>
