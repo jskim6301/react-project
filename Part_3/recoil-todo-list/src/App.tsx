@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 import Calendar from './features/Calendar';
 import TodoFormModal from "./features/TodoFormModal";
 import TodoList from "./features/TodoList";
+import TodoStatisticsModal from "./features/TodoStatisticsModal";
 
 
 const globalStyle = css`
@@ -27,8 +28,8 @@ const App: React.FC = () => (
     <Global styles={globalStyle} />
       {/*<Calendar />*/}
       {/*<TodoFormModal/>*/}
-      <TodoList/>
+      {/*<TodoList items={[{id: '1', content: 'aa', done: true, date: new Date()}]}/>*/}
+      <TodoStatisticsModal></TodoStatisticsModal>
   </RecoilRoot>
 )
-
 export default App;
