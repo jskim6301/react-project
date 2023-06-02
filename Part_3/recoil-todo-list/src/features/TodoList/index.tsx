@@ -47,15 +47,19 @@ interface Props {
     items: Array<Todo>;
 }
 
-const TodoList: React.FC = () => {
+const TodoList: React.FC<Props> = ({items}) => {
     return (
         <Base>
+            {items.slice(0,3).map((item,idx) => (
+                <TodoItem key={item.id} done={item.done}>
+                    {item.content}
+                </TodoItem>
+            ))}
             {
-
+                items.length > 3 && (
+                    <EtcItem>{`그 외 ${items.length - 3}`}</EtcItem>
+                )
             }
-            <TodoItem>
-
-            </TodoItem>
         </Base>
     );
 };
