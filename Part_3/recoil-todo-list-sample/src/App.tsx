@@ -4,9 +4,8 @@ import styled from '@emotion/styled/macro';
 import { RecoilRoot } from 'recoil';
 
 import Calendar from './features/Calendar';
-import TodoFormModal from "./features/TodoFormModal";
-import TodoList from "./features/TodoList";
-
+import TodoFormModal from './features/TodoFormModal';
+import TodoStatisticsModal from './features/TodoStatisticsModal';
 
 const globalStyle = css`
   html, body {
@@ -25,9 +24,13 @@ const Container = styled.div`
 const App: React.FC = () => (
   <RecoilRoot>
     <Global styles={globalStyle} />
-      {/*<Calendar />*/}
-      {/*<TodoFormModal/>*/}
-      <TodoList/>
+    <Container>
+      {/** Index */}
+      <Calendar />
+    </Container>
+    {/** Index */}
+    <TodoFormModal />
+    <TodoStatisticsModal />
   </RecoilRoot>
 )
 
