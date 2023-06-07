@@ -74,7 +74,7 @@ const TodoStatisticsModal: React.FC = () => {
     const handleClose = () => {};
 
     return (
-        <Modal isOpen={true} onClose={handleClose}>
+        <Modal isOpen={false} onClose={handleClose}>
             <ModalBody>
                 <Card>
                     <Date></Date>

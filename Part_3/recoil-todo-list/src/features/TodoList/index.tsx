@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from "@emotion/styled/macro";
+import {Todo} from './atom';
+
 
 const TodoItem = styled.li<{ done?: boolean; selected?: boolean; }>`
   max-width: 100px;
@@ -36,12 +38,7 @@ const Base = styled.div`
   }
 `;
 
-interface Todo {
-    id: string;
-    content: string;
-    done: boolean;
-    date: Date;
-}
+
 
 interface Props {
     items: Array<Todo>;
