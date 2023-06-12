@@ -2,6 +2,9 @@ import React, {useEffect, useMemo, useState} from 'react';
 import styled from "@emotion/styled";
 import {BiChevronLeft, BiChevronRight} from "react-icons/bi";
 import {isSameDay} from "../../utils/date";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {selectedDateState, todoListState} from "../TodoList/atom";
+import CalendarDay from "./CalendarDay";
 
 const Base = styled.div(
     {
@@ -79,30 +82,14 @@ const TableHeader = styled.thead`
 const TableBody = styled.tbody();
 const TableData = styled.td(
     {
-      textAlign: "center",
-      color: "#C9C8CC",
-      padding: "8px",
-      position: "relative",
+        textAlign: "center",
+        color: "#C9C8CC",
+        padding: "8px",
+        position: "relative",
     }
 )
 
-const DisplayDate = styled.div<{isToday?: boolean; isSelected?: boolean}>`
-  color: ${({ isToday }) => isToday && '#F8F7FA'};
-  background-color: ${({ isToday,isSelected }) => isSelected ? '#7047EB' : isToday ? '#313133' : ''};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  align-self: flex-end;
-  position: absolute;
-  top: 8px;
-  right: 60px;
-  //margin-left: 50px;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
 
-`;
 
 //요일
 const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -111,7 +98,13 @@ const MONTHS = ["January","February", "March","April","May","June","July","Augus
 
 const Calendar: React.FC = () => {
 
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const selectedDate = useRecoilValue(selectedDateState);
+    const todoList = useRecoilValue(todoListState);
+
+    const setSelectedDate =  useSetRecoilState(selectedDateState)
+
+
+  // const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const {year, month, firstDay,lastDay} = useMemo(() => {
     const year = selectedDate.getFullYear();
@@ -131,14 +124,7 @@ const Calendar: React.FC = () => {
     const today = new Date();
 
     return (
-        <TableData key={d} onClick={() => selectDate(thisDay)}>
-          <DisplayDate
-              isSelected={isSameDay(selectedDate,thisDay)}
-              isToday={isSameDay(today,thisDay)}
-          >
-            {new Date(year,month, d+1).getDate()}
-          </DisplayDate>
-        </TableData>
+        <CalendarDay date={thisDay} />
     )
   })
 
