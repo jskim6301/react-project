@@ -104,7 +104,6 @@ const DisplayDate = styled.div<{isToday?: boolean; isSelected?: boolean}>`
   width: 36px;
   height: 36px;
   cursor: pointer;
-
 `;
 
 const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -140,16 +139,20 @@ const Calendar = () => {
     const range = () => [...Array(lastDay.getDate()).keys()].map((d: number) => {
         const thisDay = new Date(year, month, d + 1);
         const today = new Date();
-       return (
-           <TableData key={d} >
-               <DisplayDate
-                isSelected={isSameDay(selectedDate,thisDay)}
-                isToday={isSameDay(today,thisDay)}
-               >
-                   {new Date(year,month,d + 1).getDate()}
-               </DisplayDate>
-           </TableData>
-       );
+
+        return (
+            <CalendarDay key={d} date={new Date(year, month, d + 1)}/>
+        )
+       // return (
+       //     <TableData key={d} >
+       //         <DisplayDate
+       //          isSelected={isSameDay(selectedDate,thisDay)}
+       //          isToday={isSameDay(today,thisDay)}
+       //         >
+       //             {new Date(year,month,d + 1).getDate()}
+       //         </DisplayDate>
+       //     </TableData>
+       // );
     });
 
     const renderDays = () => {
