@@ -26,10 +26,11 @@ const Container = styled.div`
 const App: React.FC = () => (
   <RecoilRoot>
     <Global styles={globalStyle} />
-      {/*<Calendar />*/}
+      <Container>
+          <Calendar />
+      </Container> 
       {/*<TodoFormModal/>*/}
-      {/*<TodoList items={[{id: '1', content: 'aa', done: true, date: new Date()}]}/>*/}
-      <TodoStatisticsModal></TodoStatisticsModal>
+      {/*<TodoStatisticsModal/>*/}
   </RecoilRoot>
 )
 export default App;

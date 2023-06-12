@@ -40,6 +40,7 @@ interface Props {
 }
 
 const CalendarDay: React.FC<Props> = ({ date}) => {
+    console.log("date",date);
     const today = new Date();
 
     const selectedDate = useRecoilValue(selectedDateState);
