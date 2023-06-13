@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from "@emotion/styled/macro";
 import {isSameDay} from "../../utils/date";
-import {selectedDateState} from "../TodoList/atom";
+import {filteredTodoListState, selectedDateState} from "../TodoList/atom";
 import {useRecoilValue, useSetRecoilState} from "recoil";
 import {todoStatisticsModalOpenState} from "../TodoStatisticsModal/atom";
 import {todoFormModalOpenState} from "../TodoFormModal/atom";
+import TodoList from "../TodoList";
 
 const TableData = styled.td`
   text-align: center;
@@ -41,10 +42,10 @@ const CalendarDay: React.FC<Props> = ({date}) => {
     const today = new Date();
 
     const selectedDate = useRecoilValue(selectedDateState);
+    const todoList = useRecoilValue(filteredTodoListState(date));
+
     const setSelectedDate = useSetRecoilState(selectedDateState);
-
     const setTodoFormModalOpen = useSetRecoilState(todoFormModalOpenState);
-
     const setTodoStatisticsModalOpen = useSetRecoilState(todoStatisticsModalOpenState);
 
     const handleDateSelect = (d: number) => {
@@ -76,6 +77,7 @@ const CalendarDay: React.FC<Props> = ({date}) => {
                 >
                     {date.getDate()}
                 </DisplayDate>
+                <TodoList items={todoList}/>
             </Container>
         </TableData>
     );

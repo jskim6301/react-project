@@ -47,12 +47,9 @@ interface Props {
 }
 
 const TodoList: React.FC<Props> = ({items}) => {
-
     const selectedTodo = useRecoilValue(selectedTodoState);
-
     const setSelectedTodo = useSetRecoilState(selectedTodoState);
     const setTodoStatisticsModalOpen = useSetRecoilState(todoStatisticsModalOpenState);
-
     const handleClick = (e: React.SyntheticEvent<HTMLLIElement>, todo: Todo) => {
         e.stopPropagation();
 
@@ -67,12 +64,15 @@ const TodoList: React.FC<Props> = ({items}) => {
 
 
     return (
+
         <Base>
-            {items.slice(0,3).map((item,idx) => (
-                <TodoItem key={item.id} done={item.done} onClick={(e) => handleClick(e, item)}>
-                    {item.content}
-                </TodoItem>
-            ))}
+            {
+                items.slice(0,3).map((item,idx) => (
+                    <TodoItem key={item.id} done={item.done} onClick={(e) => handleClick(e, item)}>
+                        {item.content}
+                    </TodoItem>
+                ))
+            }
             {
                 items.length > 3 && (
                     <EtcItem onClick={handleTodoStatisticsModalOpen}>{`그 외 ${items.length - 3}`}</EtcItem>
@@ -83,3 +83,14 @@ const TodoList: React.FC<Props> = ({items}) => {
 };
 
 export default TodoList;
+
+//     {items.slice(0,3).map((item,idx) => (
+//         <TodoItem key={item.id} done={item.done} onClick={(e) => handleClick(e, item)}>
+//             {item.content}
+//         </TodoItem>
+//     ))}
+//     {
+//         items.length > 3 && (
+//             <EtcItem onClick={handleTodoStatisticsModalOpen}>{`그 외 ${items.length - 3}`}</EtcItem>
+//         )
+//     }
