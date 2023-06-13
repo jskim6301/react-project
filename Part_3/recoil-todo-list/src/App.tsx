@@ -29,8 +29,8 @@ const App: React.FC = () => (
       <Container>
           <Calendar />
       </Container> 
-      {/*<TodoFormModal/>*/}
-      {/*<TodoStatisticsModal/>*/}
+      <TodoFormModal/>
+      <TodoStatisticsModal/>
   </RecoilRoot>
 )
 export default App;

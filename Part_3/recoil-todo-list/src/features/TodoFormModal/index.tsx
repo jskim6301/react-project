@@ -44,50 +44,65 @@ const Card = styled.div`
 `;
 
 const TodoFormModal: React.FC = () => {
-    // const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const [todo, setTodo] = useState<string>('');
-
-    const selectedDate = useRecoilValue(selectedDateState);
-    const todoList = useRecoilValue(todoListState);
 
     const [isOpen, setIsOpen] = useRecoilState(todoFormModalOpenState);
 
-    const handleClose = () => setIsOpen(false);
+    const handleClose = () => {
+        setIsOpen(false);
+    };
 
-    const reset = () => {
-        setTodo('');
-    }
+    // const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const addTodo = useRecoilCallback(({ snapshot, set }) => () => {
-        const todoList = snapshot.getLoadable(todoListState).getValue();
+    // const [todo, setTodo] = useState<string>('');
 
-        const newTodo = { id: uuidv4(), content: '', done: false, date: selectedDate };
-        set(todoListState, [...todoList, newTodo]);
-
-    },[todo,selectedDate, todoList]);
-
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter') {
-            addTodo();
-            reset();
-            handleClose();
-        }
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTodo(e.target.value);
-    }
+    // const selectedDate = useRecoilValue(selectedDateState);
+    // const todoList = useRecoilValue(todoListState);
+    //
+    // const [isOpen, setIsOpen] = useRecoilState(todoFormModalOpenState);
+    //
+    // const handleClose = () => setIsOpen(false);
+    //
+    // const reset = () => {
+    //     setTodo('');
+    // }
+    //
+    // const addTodo = useRecoilCallback(({ snapshot, set }) => () => {
+    //     const todoList = snapshot.getLoadable(todoListState).getValue();
+    //
+    //     const newTodo = { id: uuidv4(), content: '', done: false, date: selectedDate };
+    //     set(todoListState, [...todoList, newTodo]);
+    //
+    // },[todo,selectedDate, todoList]);
+    //
+    // const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if(e.key === 'Enter') {
+    //         addTodo();
+    //         reset();
+    //         handleClose();
+    //     }
+    // }
+    //
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setTodo(e.target.value);
+    // }
 
     return (
         <Modal isOpen={isOpen} onClose={handleClose}>
             <ModalBody>
                 <Card>
-                    <Date>{getSimpleDateFormat(selectedDate)}</Date>
-                    <InputTodo placeholder="새로운 이벤트" onKeyPress={handleKeyPress} value={todo} onChange={handleChange}/>
+                    <Date>2023-06-13</Date>
+                    <InputTodo placeholder="새로운 이벤트" />
                 </Card>
             </ModalBody>
         </Modal>
+        // <Modal isOpen={isOpen} onClose={handleClose}>
+        //     <ModalBody>
+        //         <Card>
+        //             <Date>{getSimpleDateFormat(selectedDate)}</Date>
+        //             <InputTodo placeholder="새로운 이벤트" onKeyPress={handleKeyPress} value={todo} onChange={handleChange}/>
+        //         </Card>
+        //     </ModalBody>
+        // </Modal>
     );
 };
 

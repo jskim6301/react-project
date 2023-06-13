@@ -2,7 +2,9 @@ import React from 'react';
 import styled from "@emotion/styled/macro";
 import {isSameDay} from "../../utils/date";
 import {selectedDateState} from "../TodoList/atom";
-import {useRecoilValue} from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {todoStatisticsModalOpenState} from "../TodoStatisticsModal/atom";
+import {todoFormModalOpenState} from "../TodoFormModal/atom";
 
 const TableData = styled.td`
   text-align: center;
@@ -34,20 +36,43 @@ interface Props {
     date: Date;
 }
 
+
 const CalendarDay: React.FC<Props> = ({date}) => {
     const today = new Date();
 
     const selectedDate = useRecoilValue(selectedDateState);
+    const setSelectedDate = useSetRecoilState(selectedDateState);
+
+    const setTodoFormModalOpen = useSetRecoilState(todoFormModalOpenState);
+
+    const setTodoStatisticsModalOpen = useSetRecoilState(todoStatisticsModalOpenState);
+
+    const handleDateSelect = (d: number) => {
+        setSelectedDate(new Date(selectedDate.setDate(d)));
+    }
+
+    const handleTodoStatisticsModalOpen = (e: React.SyntheticEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        setTodoStatisticsModalOpen(true);
+    }
+
+    const handleTodoFormModalOpen = (d: number) => {
+        setSelectedDate(new Date(selectedDate.setDate(d)));
+        setTodoFormModalOpen(true);
+    }
 
     return (
         <TableData
             key={`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`}
             align="center"
+            onDoubleClick={() => handleTodoFormModalOpen(date.getDate())}
         >
             <Container>
                 <DisplayDate
                     isSelected={isSameDay(selectedDate,date)}
                     isToday={isSameDay(today,date)}
+                    onClick={() => handleDateSelect(date.getDate())}
+                    onDoubleClick={handleTodoStatisticsModalOpen}
                 >
                     {date.getDate()}
                 </DisplayDate>
