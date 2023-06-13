@@ -32,4 +32,10 @@ export const handlers = [
     rest.get("http://localhost:3000/api/todos", async (req,res,ctx) => {
         return res(ctx.json(todos))
     }),
+    rest.post("http://localhost:3000/api/todo", async  (req,res,ctx) => {
+        // @ts-ignore
+        const { todo } = req.body;
+        todos.push(todo);
+        return res(ctx.json(true));
+    })
 ];
